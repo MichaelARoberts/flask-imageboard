@@ -1,0 +1,17 @@
+{% extends "template.html" %}
+{% block title %}Home{%endblock%}
+
+{%block content%}
+  <div class=container-fluid>
+    <h3>Welcome!</h3>
+    <p>Images that Exsist: </p>
+
+        {% for image in image_locations %}
+        <div class="col-lg-3">
+          <img alt="{{image}}" class="img-thumbnail" src="{{ url_for('static', filename = 'images/'+ image) }}"/>
+        </div>
+        {% endfor %}
+  </div>
+
+
+{%endblock%}
