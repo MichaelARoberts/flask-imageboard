@@ -42,6 +42,11 @@ def home():
 def submit():
     global file_count
 
+    # Recalulate how many images their are each time we submit, and adjust
+    path = './static/images/'
+    file_count = len([f for f in os.listdir(path)
+                if os.path.isfile(os.path.join(path, f))])
+
     if request.method == "POST":
         new_image_name = request.form["image_name_input"]
         file = request.files['image_upload']
@@ -59,7 +64,6 @@ def submit():
                 models.Image.create(image_name=str(new_image_name), image_location = filename)
 
                 flash("<|>Your Image as been added!")
-                file_count += 1;
 
             elif file and not allowed_file(file.filename):
                 flash("<!>That image type is not accepted.")
